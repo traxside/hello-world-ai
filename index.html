@@ -1,1 +1,358 @@
-<h1>Hello World!</h1>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ & Tips Menarik HTML</title>
+    <style>
+        /* 1. Reset Dasar & Variabel Warna */
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --primary-light: #eef2ff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 50%, #f1f5f9 100%);
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --radius-lg: 20px;
+            --radius-md: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 50px 16px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* 2. Kartu Kontainer Utama (Modern Card & Halus) */
+        .container {
+            width: 100%;
+            max-width: 680px;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.07),
+                        0 0 0 1px rgba(0, 0, 0, 0.04);
+            padding: 40px 36px;
+            transition: transform 0.3s ease;
+        }
+
+        /* 3. Header & Badge */
+        header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary-hover);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            margin-bottom: 12px;
+            border: 1px solid #c7d2fe;
+        }
+
+        header h1 {
+            font-size: 2.1rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #1e1b4b 0%, #4338ca 50%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #f1f5f9;
+            margin: 28px 0;
+        }
+
+        /* 4. Section Judul */
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 18px;
+        }
+
+        /* 5. Kartu Akordeon Modern (Details & Summary) */
+        details {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            margin-bottom: 14px;
+            overflow: hidden;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        details:hover {
+            border-color: #cbd5e1;
+            background: #f1f5f9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+        }
+
+        details[open] {
+            background: #ffffff;
+            border-color: #818cf8;
+            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.12),
+                        0 0 0 1px rgba(99, 102, 241, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Custom Icon Panah / Chevron Modern */
+        summary {
+            list-style: none; /* Hilangkan segitiga default browser */
+            padding: 18px 22px;
+            font-weight: 600;
+            font-size: 1.02rem;
+            color: var(--text-main);
+            cursor: pointer;
+            user-select: none;
+            outline: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: color 0.2s ease;
+        }
+
+        summary::-webkit-details-marker {
+            display: none; /* Untuk Safari & Chrome */
+        }
+
+        summary::after {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid #94a3b8;
+            border-bottom: 2px solid #94a3b8;
+            transform: rotate(45deg);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s ease;
+            flex-shrink: 0;
+            margin-left: 14px;
+        }
+
+        summary:hover {
+            color: var(--primary);
+        }
+
+        summary:hover::after {
+            border-color: var(--primary);
+        }
+
+        details[open] summary {
+            color: var(--primary-hover);
+        }
+
+        details[open] summary::after {
+            transform: rotate(-135deg);
+            border-color: var(--primary-hover);
+        }
+
+        /* Animasi Lembut Saat Isi Terbuka */
+        .details-body {
+            padding: 4px 22px 20px 22px;
+            color: #475569;
+            font-size: 0.96rem;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .details-body p {
+            margin-bottom: 12px;
+        }
+
+        .details-body ol, .details-body ul {
+            padding-left: 20px;
+            margin-top: 8px;
+        }
+
+        .details-body li {
+            margin-bottom: 8px;
+        }
+
+        /* Tag Code Modern */
+        code {
+            background-color: #e0e7ff;
+            color: #4338ca;
+            padding: 2px 7px;
+            border-radius: 6px;
+            font-size: 0.88em;
+            font-weight: 600;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            border: 1px solid #c7d2fe;
+        }
+
+        /* 6. Kotak Kontak Menarik */
+        .contact-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+            border: 1px solid #e0e7ff;
+            border-radius: var(--radius-md);
+            padding: 24px;
+            margin-top: 12px;
+        }
+
+        .contact-box ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contact-box li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--primary-hover);
+            text-decoration: underline;
+        }
+
+        /* 7. Footer */
+        footer {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            margin-top: 28px;
+        }
+
+        /* 8. Responsif Mobile */
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 12px;
+            }
+            .container {
+                padding: 28px 20px;
+            }
+            header h1 {
+                font-size: 1.6rem;
+            }
+            summary {
+                padding: 14px 16px;
+                font-size: 0.95rem;
+            }
+            .details-body {
+                padding: 4px 16px 16px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <span class="badge">💡 HTML5 Interactive Tip</span>
+            <h1>Tips menarik dari HTML</h1>
+            <p>Halo, saya Richie Leonardo dan sekarang mau menjelaskan sebuah elemen keren yaitu <code>&lt;details&gt;</code> dan <code>&lt;summary&gt;</code></p>
+            <hr>
+        </header>
+
+        <main>
+            <section>
+                <h2>Pertanyaan Umum</h2>
+
+                <!-- FAQ Item 1 (Terbuka secara default dengan atribut 'open') -->
+                <details open>
+                    <summary>Apa itu HTML dan bagaimana cara kerjanya?</summary>
+                    <div class="details-body">
+                        <p>HTML (<em>HyperText Markup Language</em>) adalah bahasa standar yang digunakan untuk membuat dan menyusun struktur halaman web. Browser membaca tag-tag HTML untuk menampilkan teks, gambar, tautan, dan elemen lainnya ke layar pengguna.</p>
+                    </div>
+                </details>
+
+                <!-- FAQ Item 2 -->
+                <details>
+                    <summary>Apakah halaman ini membutuhkan JavaScript agar bisa diklik?</summary>
+                    <div class="details-body">
+                        <p><strong>Tidak!</strong> Halaman ini murni menggunakan tag HTML5 bawaan, yaitu <code>&lt;details&gt;</code> dan <code>&lt;summary&gt;</code>. Browser secara otomatis menangani interaksi buka-tutup (accordion) tanpa bantuan JavaScript.</p>
+                    </div>
+                </details>
+
+                <!-- FAQ Item 3 -->
+                <details>
+                    <summary>Langkah apa yang dipelajari setelah memahami HTML?</summary>
+                    <div class="details-body">
+                        <p>Setelah menguasai dasar-dasar struktur HTML, langkah yang disarankan adalah:</p>
+                        <ol>
+                            <li><strong>CSS</strong>: Untuk menghias warna, tipografi, tata letak, dan responsivitas.</li>
+                            <li><strong>JavaScript</strong>: Untuk menambahkan logika program, manipulasi data, dan interaksi lanjutan.</li>
+                        </ol>
+                    </div>
+                </details>
+
+                <!-- FAQ Item 4 -->
+                <details>
+                    <summary>Apakah elemen ini didukung di semua browser modern?</summary>
+                    <div class="details-body">
+                        <p>Ya, tag <code>&lt;details&gt;</code> dan <code>&lt;summary&gt;</code> didukung penuh secara native di Google Chrome, Firefox, Safari, Edge, dan peramban mobile.</p>
+                    </div>
+                </details>
+            </section>
+
+            <hr>
+
+            <section class="contact-box">
+                <h2>Masih Punya Pertanyaan?</h2>
+                <p>Jika pertanyaan Anda belum terjawab di atas, silakan hubungi kami:</p>
+                <ul>
+                    <li>📧 Email: <a href="mailto:support@example.com">support@example.com</a></li>
+                    <li>🌐 Website: <a href="https://example.com" target="_blank">Kunjungi situs kami</a></li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <hr>
+            <p><small>&copy; 2026 Belajar HTML & CSS. Dibuat dengan rapi & responsif.</small></p>
+        </footer>
+    </div>
+
+</body>
+</html>
